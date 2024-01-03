@@ -3,6 +3,10 @@ class Ex13 {
   public static void main(String[] args) {
     int [] arr = {-8,1,-4,11,9,-15,10,8,-3};
     maxMul3(arr);
+
+    int [] a1 = {1,12,15,26,38};
+    int [] a2 = {12,13,18,30,45};
+    findMedian(a1, a2);
   }
 
 
@@ -39,4 +43,10 @@ class Ex13 {
     return sunMul;
   }
 
+
+  public static int findMedian (int[] arr1, int[] arr2){
+    int low = 0 , high = arr2.length , mid = (arr1.length + arr2.length)/2;
+    System.out.println(mid);
+    return mid;
+  }
 }
