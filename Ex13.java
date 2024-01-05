@@ -14,14 +14,12 @@ class Ex13 {
     };
     System.out.println(maxSnake(mat));
 
-    // System.out.println(find_max(arr));
+    int [] a1 = {1,12,15,26,38};
+    int [] a2 = {12,13,18,30,45};
+    findMedian(a1, a2);
 
-    // int [] a1 = {1,12,15,26,38};
-    // int [] a2 = {12,13,18,30,45};
-    // findMedian(a1, a2);
-
-    // String str = "hello world";
-    // System.out.println(str.substring(6));
+    String str = "hello world";
+    System.out.println(str.substring(6));
   }
 
   // Q1
@@ -62,19 +60,19 @@ class Ex13 {
   }
 
   // Q2
-  // public static int findMedian (int[] arr1, int[] arr2){
-  // int low = 0 , high = arr1.length+arr2.length , mid = (arr1.length +
-  // arr2.length)/2;
-  // System.out.println(low);
-  // System.out.println(mid);
-  // System.out.println(high);
+  public static int findMedian (int[] arr1, int[] arr2){
+  int low = 0 , high = arr1.length+arr2.length , mid = (arr1.length +
+  arr2.length)/2;
+  System.out.println(low);
+  System.out.println(mid);
+  System.out.println(high);
 
   // while(low<=high){
 
   // }
 
-  // return mid;
-  // }
+  return mid;
+  }
 
 
   // Q4
