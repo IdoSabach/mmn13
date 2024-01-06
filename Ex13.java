@@ -82,6 +82,7 @@ class Ex13 {
 
   // Q3
 
+
   // Q4
 
   /*
@@ -102,7 +103,7 @@ class Ex13 {
 
   private static int maxSnake(int[][] mat, int i, int j, int prev) {
     if (i < 0 || j < 0 || i > mat.length - 1 || j > mat[0].length - 1 || mat[i][j] == -1
-        || Math.abs(mat[i][j] - prev) > 1) {
+        || mat[i][j] - prev > 1 || mat[i][j] - prev < -1) {
       return Integer.MIN_VALUE;
     }
 
@@ -135,7 +136,7 @@ class Ex13 {
     };
     int[][] mat1 = {
         { 4, 5 },
-        { 3, 4},
+        { 3, 4 },
         { 1, 5 },
     };
     System.out.println(maxSnake(mat));
@@ -145,8 +146,10 @@ class Ex13 {
 
     System.out.println(findMedian(a1, a2));
 
-    // String str = "hello world";
-    // System.out.println(str.substring(6));
+    String st1 = "AGGTAB";
+    String st2 = "GXTXAYB";
+    System.out.println(minimalSt(st1, st2));
+
   }
 
 }
