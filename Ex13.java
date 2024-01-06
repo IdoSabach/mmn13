@@ -3,9 +3,11 @@ class Ex13 {
 
   // Q1
 
-  /* In this method I receive an array as a parameter and look for 
-  three numbers in this array whose product is the highest, 
-  and I return the sum. */
+  /*
+   * In this method I receive an array as a parameter and look for
+   * three numbers in this array whose product is the highest,
+   * and I return the sum.
+   */
 
   // time = O(n)
   // place = O(1)
@@ -44,16 +46,17 @@ class Ex13 {
     return sunMul;
   }
 
-
   // Q2
 
-  /* In this method I receive two arrays as a parameter 
-  and search in these arrays for the middle of the two 
-  and return the average number of their middle i.e. median. */
+  /*
+   * In this method I receive two arrays as a parameter
+   * and search in these arrays for the middle of the two
+   * and return the average number of their middle i.e. median.
+   */
 
   // time = O(n) i need O(Log(n))
   // place = O(1)
-  
+
   public static int findMedian(int[] arr1, int[] arr2) {
     int n = arr1.length + arr2.length;
     int[] mergedArray = new int[n];
@@ -68,27 +71,28 @@ class Ex13 {
       }
     }
 
-    int median = mergedArray.length /2;
+    int median = mergedArray.length / 2;
 
-    if(mergedArray.length % 2 == 1 ){
+    if (mergedArray.length % 2 == 1) {
       return mergedArray[median];
-    }else{
-      return (mergedArray[median] + mergedArray[median-1]) / 2;
+    } else {
+      return (mergedArray[median] + mergedArray[median - 1]) / 2;
     }
   }
 
-
   // Q3
-
 
   // Q4
 
-  /* In this method I get a 2D array as a parameter and go
-   through each cell recursively and look for the longest route to the last cell, 
-   returning the longest route in number. */ 
+  /*
+   * In this method I get a 2D array as a parameter and go
+   * through each cell recursively and look for the longest route to the last
+   * cell,
+   * returning the longest route in number.
+   */
 
   public static int maxSnake(int[][] mat) {
-    int sum = maxSnake(mat, 0, 0, mat[0][0], 1);
+    int sum = maxSnake(mat, 0, 0, mat[0][0]);
     if (sum <= 1) {
       return Integer.MIN_VALUE;
     } else {
@@ -96,35 +100,30 @@ class Ex13 {
     }
   }
 
-  private static int maxSnake(int[][] mat, int i, int j, int prev, int lengthWay) {
-    if (i < 0 || j < 0 || i > mat.length - 1 || j > mat[0].length - 1 || mat[i][j] == -1) {
+  private static int maxSnake(int[][] mat, int i, int j, int prev) {
+    if (i < 0 || j < 0 || i > mat.length - 1 || j > mat[0].length - 1 || mat[i][j] == -1
+        || Math.abs(mat[i][j] - prev) > 1) {
       return Integer.MIN_VALUE;
     }
 
     if (i == mat.length - 1 && j == mat[0].length - 1) {
-      return 0;
+      return 1;
     }
 
-    int current = mat[i][j];
+    prev = mat[i][j];
+    mat[i][j] = -1;
 
-    if (Math.abs(current - prev) == 1 || current == prev) {
-      mat[i][j] = -1;
+    int down = 1 + maxSnake(mat, i + 1, j, prev);
+    int right = 1 + maxSnake(mat, i, j + 1, prev);
+    int up = 1 + maxSnake(mat, i - 1, j, prev);
+    int left = 1 + maxSnake(mat, i, j - 1, prev);
 
-      int down = maxSnake(mat, i + 1, j, current, lengthWay + 1);
-      int right = maxSnake(mat, i, j + 1, current, lengthWay + 1);
-      int up = maxSnake(mat, i - 1, j, current, lengthWay + 1);
-      int left = maxSnake(mat, i, j - 1, current, lengthWay + 1);
+    mat[i][j] = prev;
 
-      mat[i][j] = current;
-
-      return Math.max(Math.max(down, right), Math.max(up, left));
-    }
-    return lengthWay;
+    return Math.max(Math.max(down, right), Math.max(up, left));
   }
 
-
-
-   public static void main(String[] args) {
+  public static void main(String[] args) {
     int[] arr = { -8, 1, -4, 11, 9, -15, 10, 8, -3 };
     maxMul3(arr);
     int[][] mat = {
@@ -134,11 +133,16 @@ class Ex13 {
         { 3, 4, 5, 8, 9 },
         { 3, 2, 2, 7, 6 }
     };
+    int[][] mat1 = {
+        { 4, 5 },
+        { 3, 4},
+        { 1, 5 },
+    };
     System.out.println(maxSnake(mat));
 
     int[] a1 = { 1, 12, 15, 26, 38 };
     int[] a2 = { 12, 13, 18, 30, 45 };
-    
+
     System.out.println(findMedian(a1, a2));
 
     // String str = "hello world";
