@@ -1,30 +1,15 @@
-import javax.print.DocFlavor.STRING;
 
 class Ex13 {
 
-  public static void main(String[] args) {
-    int[] arr = { -8, 1, -4, 11, 9, -15, 10, 8, -3 };
-    maxMul3(arr);
-    int[][] mat = {
-        { 4, 5, 2, 3, 1 },
-        { 3, 4, 1, 4, 4 },
-        { 1, 5, 6, 7, 8 },
-        { 3, 4, 5, 8, 9 },
-        { 3, 2, 2, 7, 6 }
-    };
-    System.out.println(maxSnake(mat));
-
-    int [] a1 = {1,12,15,26,38};
-    int [] a2 = {12,13,18,30,45};
-    findMedian(a1, a2);
-
-    String str = "hello world";
-    System.out.println(str.substring(6));
-  }
-
   // Q1
+
+  /* In this method I receive an array as a parameter and look for 
+  three numbers in this array whose product is the highest, 
+  and I return the sum. */
+
   // time = O(n)
   // place = O(1)
+
   public static int maxMul3(int[] arr) {
     int i = 0, j = 1, x = 2;
     int num1 = 0, num2 = 0, num3 = 0;
@@ -59,23 +44,49 @@ class Ex13 {
     return sunMul;
   }
 
+
   // Q2
-  public static int findMedian (int[] arr1, int[] arr2){
-  int low = 0 , high = arr1.length+arr2.length , mid = (arr1.length +
-  arr2.length)/2;
-  System.out.println(low);
-  System.out.println(mid);
-  System.out.println(high);
 
-  // while(low<=high){
+  /* In this method I receive two arrays as a parameter 
+  and search in these arrays for the middle of the two 
+  and return the average number of their middle i.e. median. */
 
-  // }
+  // time = O(n) i need O(Log(n))
+  // place = O(1)
+  
+  public static int findMedian(int[] arr1, int[] arr2) {
+    int n = arr1.length + arr2.length;
+    int[] mergedArray = new int[n];
 
-  return mid;
+    int i = 0, j = 0, k = 0;
+
+    while (i < arr1.length && j < arr2.length) {
+      if (arr1[i] <= arr2[j]) {
+        mergedArray[k++] = arr1[i++];
+      } else {
+        mergedArray[k++] = arr2[j++];
+      }
+    }
+
+    int median = mergedArray.length /2;
+
+    if(mergedArray.length % 2 == 1 ){
+      return mergedArray[median];
+    }else{
+      return (mergedArray[median] + mergedArray[median-1]) / 2;
+    }
   }
 
 
+  // Q3
+
+
   // Q4
+
+  /* In this method I get a 2D array as a parameter and go
+   through each cell recursively and look for the longest route to the last cell, 
+   returning the longest route in number. */ 
+
   public static int maxSnake(int[][] mat) {
     int sum = maxSnake(mat, 0, 0, mat[0][0], 1);
     if (sum <= 1) {
@@ -109,6 +120,29 @@ class Ex13 {
       return Math.max(Math.max(down, right), Math.max(up, left));
     }
     return lengthWay;
+  }
+
+
+
+   public static void main(String[] args) {
+    int[] arr = { -8, 1, -4, 11, 9, -15, 10, 8, -3 };
+    maxMul3(arr);
+    int[][] mat = {
+        { 4, 5, 2, 3, 1 },
+        { 3, 4, 1, 4, 4 },
+        { 1, 5, 6, 7, 8 },
+        { 3, 4, 5, 8, 9 },
+        { 3, 2, 2, 7, 6 }
+    };
+    System.out.println(maxSnake(mat));
+
+    int[] a1 = { 1, 12, 15, 26, 38 };
+    int[] a2 = { 12, 13, 18, 30, 45 };
+    
+    System.out.println(findMedian(a1, a2));
+
+    // String str = "hello world";
+    // System.out.println(str.substring(6));
   }
 
 }
