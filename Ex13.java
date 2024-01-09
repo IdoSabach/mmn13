@@ -13,20 +13,20 @@ class Ex13 {
   // place = O(1)
 
   public static int maxMul3(int[] arr) {
-    int i = 0, j = 1, x = 2;
-    int num1 = 0, num2 = 0, num3 = 0;
-    int sunMul = arr[i] * arr[j] * arr[x];
-
     if (arr.length < 3) {
       return Integer.MIN_VALUE;
     }
 
+    int i = 0, j = 1, x = 2;
+    // int num1 = 0, num2 = 0, num3 = 0;
+    int sunMul = arr[i] * arr[j] * arr[x];
+
     while (i < arr.length - 3) {
       if (arr[i] * arr[j] * arr[x] > sunMul) {
         sunMul = arr[i] * arr[j] * arr[x];
-        num1 = arr[i];
-        num2 = arr[j];
-        num3 = arr[x];
+        // num1 = arr[i];
+        // num2 = arr[j];
+        // num3 = arr[x];
       } else {
         x++;
       }
@@ -42,7 +42,7 @@ class Ex13 {
         x = j + 1;
       }
     }
-    System.out.println(num1 + " * " + num2 + " * " + num3 + " = " + sunMul);
+    // System.out.println(num1 + " * " + num2 + " * " + num3 + " = " + sunMul);
     return sunMul;
   }
 
@@ -54,33 +54,68 @@ class Ex13 {
    * and return the average number of their middle i.e. median.
    */
 
-  // time = O(n) i need O(Log(n))
+  // time = O(Log(n))
   // place = O(1)
 
   public static int findMedian(int[] arr1, int[] arr2) {
-    int n = arr1.length + arr2.length;
-    int[] mergedArray = new int[n];
+    int total = arr1.length + arr2.length;
+    int half = (total + 1) / 2;
 
-    int i = 0, j = 0, k = 0;
+    int left = 0;
+    int right = arr1.length;
 
-    while (i < arr1.length && j < arr2.length) {
-      if (arr1[i] <= arr2[j]) {
-        mergedArray[k++] = arr1[i++];
+    int left1, right1, left2, right2;
+
+    int median = 0;
+
+    while (left <= right) {
+      int i = left + (right - left) / 2;
+      int j = half - i;
+
+      if (i > 0) {
+        left1 = arr1[i - 1];
       } else {
-        mergedArray[k++] = arr2[j++];
+        left1 = Integer.MIN_VALUE;
+      }
+
+      if (i < arr1.length) {
+        right1 = arr1[i];
+      } else {
+        right1 = Integer.MAX_VALUE;
+      }
+
+      if (j > 0) {
+        left2 = arr2[j - 1];
+      } else {
+        left2 = Integer.MIN_VALUE;
+      }
+
+      if (j < arr2.length) {
+        right2 = arr2[j];
+      } else {
+        right2 = Integer.MAX_VALUE;
+      }
+
+      if (left1 <= right2 && left2 <= right1) {
+        if (total % 2 == 0) {
+          median = (Math.max(left1, left2) + Math.min(right1, right2)) /
+              2;
+        } else {
+          median = Math.max(left1, left2);
+        }
+        break;
+      } else if (left1 > right2) {
+        right = i - 1;
+      } else {
+        left = i + 1;
       }
     }
 
-    int median = mergedArray.length / 2;
-
-    if (mergedArray.length % 2 == 1) {
-      return mergedArray[median];
-    } else {
-      return (mergedArray[median] + mergedArray[median - 1]) / 2;
-    }
+    return median;
   }
 
   // Q3
+
 
 
   // Q4
@@ -124,9 +159,12 @@ class Ex13 {
     return Math.max(Math.max(down, right), Math.max(up, left));
   }
 
+
+  
   public static void main(String[] args) {
     int[] arr = { -8, 1, -4, 11, 9, -15, 10, 8, -3 };
     maxMul3(arr);
+    System.out.println(maxMul3(arr));
     int[][] mat = {
         { 4, 5, 2, 3, 1 },
         { 3, 4, 1, 4, 4 },
@@ -134,21 +172,13 @@ class Ex13 {
         { 3, 4, 5, 8, 9 },
         { 3, 2, 2, 7, 6 }
     };
-    int[][] mat1 = {
-        { 4, 5 },
-        { 3, 4 },
-        { 1, 5 },
-    };
+
     System.out.println(maxSnake(mat));
 
     int[] a1 = { 1, 12, 15, 26, 38 };
     int[] a2 = { 12, 13, 18, 30, 45 };
 
     System.out.println(findMedian(a1, a2));
-
-    String st1 = "AGGTAB";
-    String st2 = "GXTXAYB";
-    System.out.println(minimalSt(st1, st2));
 
   }
 
